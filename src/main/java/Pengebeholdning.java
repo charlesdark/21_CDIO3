@@ -1,5 +1,5 @@
 public class Pengebeholdning {
-    int Saldo = 1000;
+    int Saldo = 35;
 
     public int getSaldo(){
         return Saldo;

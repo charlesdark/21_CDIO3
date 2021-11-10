@@ -1,8 +1,7 @@
 public class Spiller {
 
     String name;
-    int konto = 1000;
-    String felt;
+    int position = 0;
 
     public void roll() {
         Dice dice = new Dice();

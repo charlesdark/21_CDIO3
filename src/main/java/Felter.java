@@ -1,4 +1,10 @@
 public class Felter {
+    public static int Start(){
+        return 2;
+    }
+    public static String start() {
+        return "Du kører forbi start og modtager 2$";
+    }
     public static int Burgerbar() {
         return 1;
     }
