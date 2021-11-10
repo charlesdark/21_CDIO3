@@ -15,20 +15,20 @@ public class MonopolyJunior {
 
 
        for(int i = 0; i < Max; i++){
-            sc.nextLine();
-            Spiller spiller = new Spiller();
-            System.out.println("Indtast navn: ");
-            spiller.name = sc.nextLine();
-            spillere[i] = spiller.name;
-            Pengebeholdning pengebeholdning = new Pengebeholdning();
-            Beholdning[i] = pengebeholdning.getSaldo();
+           sc.nextLine();
+           Spiller spiller = new Spiller();
+           System.out.println("Indtast navn: ");
+           spiller.name = sc.next();
+           spillere[i] = spiller.name;
+           Pengebeholdning pengebeholdning = new Pengebeholdning();
+           Beholdning[i] = pengebeholdning.getSaldo();
         }
-       Beholdning[2] += 500;
+       Beholdning[0] += 500;
        Beholdning[1] += 1000;
 
        for (int i = 0; i < Max; i++) {
            System.out.println("Spiller: " + spillere[i] + ", slå med terningerne!");
-           System.out.println("Spiller " + spillere[i] + ", din saldo er: " + Beholdning[i]);
+           System.out.println("Spiller " + spillere[i] + ", din saldo er: " + Beholdning[i] +"\n");
        }
 
     }
