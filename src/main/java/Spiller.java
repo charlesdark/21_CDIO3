@@ -9,7 +9,7 @@ public class Spiller {
 
         dice.roll1();
         dice.roll2();
-
+/*
         switch (Dice.getSum()) {
             case 2:
                 konto += Felter.Tower();
@@ -55,6 +55,7 @@ public class Spiller {
                 konto += Felter.Goldmine();
                 felt = FelterDansk.goldmine();
                 break;
-        }
+        }*/
     }
+
 }
