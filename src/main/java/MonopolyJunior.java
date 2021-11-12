@@ -1,34 +1,42 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MonopolyJunior {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        Dice dice = new Dice();
-        String name;
+        Felter felter = new Felter();
         int Max;
 
         System.out.println("2-4 spillere.");
         System.out.println("Hvor mange spiller?: ");
         Max = sc.nextInt();
-        String spillere[] = new String[Max];
-        int Beholdning[] = new int[Max];
-
+        Spiller[] spiller = new Spiller[Max];
 
        for(int i = 0; i < Max; i++){
            sc.nextLine();
-           Spiller spiller = new Spiller();
+           spiller[i] = new Spiller();
            System.out.println("Indtast navn: ");
-           spiller.name = sc.next();
-           spillere[i] = spiller.name;
-           Pengebeholdning pengebeholdning = new Pengebeholdning();
-           Beholdning[i] = pengebeholdning.getSaldo();
-        }
-       Beholdning[0] += 500;
-       Beholdning[1] += 1000;
+           spiller[i].setName(sc.next());
 
-       for (int i = 0; i < Max; i++) {
-           System.out.println("Spiller: " + spillere[i] + ", slå med terningerne!");
-           System.out.println("Spiller " + spillere[i] + ", din saldo er: " + Beholdning[i] +"\n");
+        }
+
+       for (int i = 0; spiller[i].getKonto() > 0; i++) {
+           spiller[i].roll();
+           spiller[i].setFelt();
+           felter.setFelt(spiller[i].getFelt());
+           spiller[i].setKonto(felter.feltInt);
+
+           System.out.println("Spiller: " + spiller[i].getName() + ", slå med terningerne!\n");
+
+           try{System.in.read();}
+           catch(Exception e){}
+
+           System.out.println("Du slog " + Dice.getSum() + " " + felter.felt);
+           System.out.println("Spiller " + spiller[i].getName() + ", din saldo er: " + spiller[i].getKonto() +"\n");
+
+           if (i == (Max - 1)){
+               i = -1;
+           }
        }
 
     }
