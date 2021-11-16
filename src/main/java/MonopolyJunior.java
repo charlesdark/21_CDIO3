@@ -83,8 +83,11 @@ public class MonopolyJunior {
                 gui.addPlayer(player[i]);
             }
         }
-        fields[0].setCar(player[0], true);
-        fields[0].setCar(player[1], true);
+        //Tilføjer spillerne til start-pladsen
+        for(int i = 0; i < numPlayers; i++) {
+            fields[0].setCar(player[i], true);
+        }
+
         gui.showMessage("Tryk OK for at starte spillet!");
 
         for(int i = 0; player[i].getBalance() > 0; i++){
@@ -101,6 +104,12 @@ public class MonopolyJunior {
             //Opdaterer spilleren konto
             spiller[i].setKonto(-2);
             player[i].setBalance(spiller[i].getKonto());
+
+            //Giver en ekstra tur hvis man lander på railroad
+            if(spiller[i].getFelt() == 12){
+                i = i-1;
+                gui.showMessage("Du har fået et ekstra slag!");
+            }
 
             if(i == (numPlayers - 1)){
                 i = -1;

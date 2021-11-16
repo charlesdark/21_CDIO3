@@ -24,7 +24,9 @@ public class Spiller {
     }
     public void setFelt(){
         if((felt + slag)>24){
-            felt = (felt + slag) % 24;}
+            felt = (felt + slag) % 24;
+            konto +=2;
+        }
         else{
             felt += slag;
         }
