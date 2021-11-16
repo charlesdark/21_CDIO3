@@ -5,6 +5,7 @@ public class LooseChange {
     public int getPayed(){
         return saldo;
     }
+
     public void betalSaldo(int penge){
         saldo -= penge;
     }

@@ -17,7 +17,10 @@ public class Felter {
         felt = Files.readAllLines(Paths.get(feltDK)).get(slag);
     }
 
-    public String getFelt() {
+    public String getFeltStr() {
         return felt;
+    }
+    public int getFeltInt(){
+        return feltInt;
     }
 }

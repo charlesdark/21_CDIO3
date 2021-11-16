@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MonopolyJunior {
@@ -13,32 +14,41 @@ public class MonopolyJunior {
         Max = sc.nextInt();
         Spiller[] spiller = new Spiller[Max];
 
-       for(int i = 0; i < Max; i++){
-           sc.nextLine();
-           spiller[i] = new Spiller();
-           System.out.println("Indtast navn: ");
-           spiller[i].setName(sc.next());
+
+        for (int i = 0; i < Max; i++) {
+            sc.nextLine();
+            spiller[i] = new Spiller();
+            System.out.println("Indtast navn: ");
+            spiller[i].setName(sc.next());
         }
 
-       for (int i = 0; spiller[i].getKonto() > 0; i++) {
-           spiller[i].roll();
-           spiller[i].setFelt();
-           felter.setFelt(spiller[i].getFelt());
-           spiller[i].setKonto(felter.feltInt);
+        for (int i = 0; spiller[i].getKonto() > 0; i++) {
+            spiller[i].roll();
+            spiller[i].setFelt();
+            felter.setFelt(spiller[i].getFelt());
 
-           System.out.println("Spiller: " + spiller[i].getName() + ", slå med terningerne!\n");
+            if (spiller[i].getFelt() == 8) {
+                looseChange.betalSaldo(felter.getFeltInt());
+                spiller[i].setKonto(felter.getFeltInt());
+            }
+            else if (spiller[i].getFelt() == 16){
+                spiller[i].setKonto(looseChange.getPayed());
+                looseChange.saldo = 0;
+            }else {spiller[i].setKonto(felter.getFeltInt());}
 
-           try{System.in.read();}
-           catch(Exception e){}
+            System.out.println("Spiller: " + spiller[i].getName() + ", slå med terningerne!\n");
 
-           System.out.println("Du slog " + Dice.getSum() + " " + felter.felt);
-           System.out.println("Spiller " + spiller[i].getName() + ", din saldo er: " + spiller[i].getKonto() +"\n");
+            System.in.read();
 
-           if (i == (Max - 1)){
-               i = -1;
-           }
-       }
+            System.out.println("Du slog " + Dice.getSum() + ". Du står på felt nr: " + spiller[i].getFelt() + "\n" + felter.getFeltStr());
+            System.out.println("Spiller " + spiller[i].getName() + ", din saldo er: " + spiller[i].getKonto() + "og loose change er: " + looseChange.saldo + "\n");
+
+            if (i == (Max - 1)) {
+                i = -1;
+            }
+
+        }
 
     }
 
-}
+    }
