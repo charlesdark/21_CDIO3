@@ -5,6 +5,7 @@ public class MonopolyJunior {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Felter felter = new Felter();
+        LooseChange looseChange = new LooseChange();
         int Max;
 
         System.out.println("2-4 spillere.");
@@ -17,7 +18,6 @@ public class MonopolyJunior {
            spiller[i] = new Spiller();
            System.out.println("Indtast navn: ");
            spiller[i].setName(sc.next());
-
         }
 
        for (int i = 0; spiller[i].getKonto() > 0; i++) {
