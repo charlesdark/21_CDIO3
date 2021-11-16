@@ -2,7 +2,7 @@ import java.util.Random;
 
 class Dice {
 
-    static int roll1, roll2, getSum;
+    static int roll1, roll2, getSum, roll;
     Random rn = new Random();
 
     public void roll1() {
