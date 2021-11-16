@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import gui_fields.*;
 import gui_main.GUI;
+import gui_fields.GUI_Shipping;
 import gui_codebehind.*;
 import gui_resources.*;
 import gui_tests.*;
@@ -18,13 +19,13 @@ public class MonopolyJunior {
         GUI_Start start = new GUI_Start(); start.setTitle("GO!"); start.setBackGroundColor(Color.GREEN); start.setSubText("Modtag 2$"); fields[0] = start;
         GUI_Street street1 = new GUI_Street(); street1.setTitle("Burger Joint"); street1.setBorder(Color.BLACK); street1.setBackGroundColor(Color.RED); street1.setSubText("2$"); fields[1] = street1;
         GUI_Street street2 = new GUI_Street(); street2.setTitle("Pizza Joint"); street2.setBorder(Color.BLACK); street2.setBackGroundColor(Color.RED); street2.setSubText("2$"); fields[2] = street2;
-        GUI_Street chance = new GUI_Street(); chance.setTitle("Chancekort"); chance.setBorder(Color.BLACK); chance.setBackGroundColor(Color.GREEN); chance.setSubText("?"); fields[3] = chance;
+        GUI_Chance chance = new GUI_Chance(); chance.setBackGroundColor(Color.GREEN); chance.setForeGroundColor(Color.BLACK); fields[3] = chance;
         GUI_Street street3 = new GUI_Street(); street3.setTitle("Candy Store"); street3.setBorder(Color.BLACK); street3.setBackGroundColor(Color.YELLOW); street3.setSubText("2$"); fields[4] = street3;
         GUI_Street street4 = new GUI_Street(); street4.setTitle("Ice Cream Palour"); street4.setBorder(Color.BLACK); street4.setBackGroundColor(Color.YELLOW); street4.setSubText("2$"); fields[5] = street4;
         GUI_Street pay = new GUI_Street(); pay.setTitle("pay 2$ dollars"); pay.setBorder(Color.BLACK); pay.setBackGroundColor(Color.GREEN); pay.setSubText("2$"); fields[6] = pay;
         GUI_Street street5 = new GUI_Street(); street5.setTitle("Museum"); street5.setBorder(Color.BLACK); street5.setBackGroundColor(Color.BLUE); street5.setSubText("2$"); fields[7] = street5;
         GUI_Street street6 = new GUI_Street(); street6.setTitle("Library"); street6.setBorder(Color.BLACK); street6.setBackGroundColor(Color.BLUE); street6.setSubText("2$"); fields[8] = street6;
-        GUI_Street chance2 = new GUI_Street(); chance2.setTitle("Chancekort"); chance2.setBorder(Color.BLACK); chance2.setBackGroundColor(Color.GREEN); chance2.setSubText("?"); fields[9] = chance2;
+        GUI_Chance chance2 = new GUI_Chance(); chance2.setBackGroundColor(Color.GREEN); chance2.setForeGroundColor(Color.BLACK); fields[9] = chance2;
         GUI_Street street7 = new GUI_Street(); street7.setTitle("Skate Park"); street7.setBorder(Color.BLACK); street7.setBackGroundColor(Color.ORANGE); street7.setSubText("2$"); fields[10] = street7;
         GUI_Street street8 = new GUI_Street(); street8.setTitle("Swimming Pool"); street8.setBorder(Color.BLACK); street8.setBackGroundColor(Color.ORANGE); street8.setSubText("2$"); fields[11] = street8;
         GUI_Street railroad = new GUI_Street(); railroad.setTitle("Railroad"); railroad.setBorder(Color.BLACK); railroad.setBackGroundColor(Color.GREEN); railroad.setSubText("Du får en ekstra tur"); fields[12] = railroad;
@@ -36,7 +37,7 @@ public class MonopolyJunior {
         GUI_Street loosechange = new GUI_Street(); loosechange.setTitle("Loose Change"); loosechange.setBorder(Color.BLACK); loosechange.setBackGroundColor(Color.GREEN); loosechange.setSubText("JACKPOT!"); fields[18] = loosechange;
         GUI_Street street13 = new GUI_Street(); street13.setTitle("Bowling Ally"); street13.setBorder(Color.BLACK); street13.setBackGroundColor(Color.PINK); street13.setSubText("2$"); fields[19] = street13;
         GUI_Street street14 = new GUI_Street(); street14.setTitle("The Zoo"); street14.setBorder(Color.BLACK); street14.setBackGroundColor(Color.PINK); street14.setSubText("2$"); fields[20] = street14;
-        GUI_Street chance3 = new GUI_Street(); chance3.setTitle("Chancekort"); chance3.setBorder(Color.BLACK); chance3.setBackGroundColor(Color.GREEN); chance3.setSubText("?"); fields[21] = chance3;
+        GUI_Chance chance3 = new GUI_Chance(); chance3.setBackGroundColor(Color.GREEN); chance3.setForeGroundColor(Color.BLACK); fields[21] = chance3;
         GUI_Street street15 = new GUI_Street(); street15.setTitle("Park Place"); street15.setBorder(Color.BLACK); street15.setBackGroundColor(Color.BLUE); street15.setSubText("2$"); fields[22] = street15;
         GUI_Street street16 = new GUI_Street(); street16.setTitle("BoardWalk"); street16.setBorder(Color.BLACK); street16.setBackGroundColor(Color.BLUE); street16.setSubText("2$"); fields[23] = street16;
 
