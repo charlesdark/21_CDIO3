@@ -45,7 +45,7 @@ public class MonopolyJunior {
        int x;
        int max = spiller[0].getKonto();
 
-       for (x = 0; x < spiller.length; x++) {
+       for (x = 0; x < Max; x++) {
            if (spiller[x].getKonto() > max) {
                max = spiller[x].getKonto();
            }
