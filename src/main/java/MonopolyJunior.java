@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class MonopolyJunior {
@@ -37,7 +38,21 @@ public class MonopolyJunior {
            if (i == (Max - 1)){
                i = -1;
            }
+           
+
        }
+
+       int x;
+       int max = spiller[0].getKonto();
+
+       for (x = 0; x < spiller.length; x++) {
+           if (spiller[x].getKonto() > max) {
+               max = spiller[x].getKonto();
+           }
+       }
+
+        System.out.println(spiller[x] + " har vundet!" );
+
 
     }
 
