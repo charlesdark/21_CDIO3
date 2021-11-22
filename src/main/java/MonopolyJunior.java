@@ -10,35 +10,45 @@ public class MonopolyJunior {
 
         System.out.println("2-4 spillere.");
         System.out.println("Hvor mange spiller?: ");
-        Max = sc.nextInt();
-        Spiller[] spiller = new Spiller[Max];
+        Max = sc.nextInt(); //Sætter Max til antal spillere
+        Spiller[] spiller = new Spiller[Max]; //Laver et array af spillerklasser
 
-       for(int i = 0; i < Max; i++){
-           sc.nextLine();
-           spiller[i] = new Spiller();
-           System.out.println("Indtast navn: ");
-           spiller[i].setName(sc.next());
+        //For hver spiller, giver vi dem et navn
+        for (int i = 0; i < Max; i++) {
+            sc.nextLine();
+            spiller[i] = new Spiller();
+            System.out.println("Indtast navn: ");
+            spiller[i].setName(sc.next());
         }
 
-       for (int i = 0; spiller[i].getKonto() > 0; i++) {
-           spiller[i].roll();
-           spiller[i].setFelt();
-           felter.setFelt(spiller[i].getFelt());
-           spiller[i].setKonto(felter.feltInt);
+        //Kør et loop indtil en spillers konto når 0
+        for (int i = 0; spiller[i].getKonto() > 0; i++) {
+            spiller[i].roll();  //Slå spillers terning
+            spiller[i].setFelt(); //Sæt spilleren på et felt
+            felter.setFelt(spiller[i].getFelt()); //Sætter felter-klassen på samme felt som spilleren
 
-           System.out.println("Spiller: " + spiller[i].getName() + ", slå med terningerne!\n");
+            if (spiller[i].getFelt() == 8) { //Hvis spilleren lander på 8, skal de betale til looseChange
+                looseChange.betalSaldo(felter.getFeltInt());
+                spiller[i].setKonto(felter.getFeltInt());
+            }
+            else if (spiller[i].getFelt() == 16){ //Hvis spilleren lander på 16 får de looseChange og LC bliver sat til 0
+                spiller[i].setKonto(looseChange.getPayed());
+                looseChange.saldo = 0;
+            }else {spiller[i].setKonto(felter.getFeltInt());}
 
-           try{System.in.read();}
-           catch(Exception e){}
+            System.out.println("Spiller: " + spiller[i].getName() + ", slå med terningerne!\n");
 
-           System.out.println("Du slog " + Dice.getSum() + " " + felter.felt);
-           System.out.println("Spiller " + spiller[i].getName() + ", din saldo er: " + spiller[i].getKonto() +"\n");
+            System.in.read();
 
-           if (i == (Max - 1)){
-               i = -1;
-           }
-       }
+            System.out.println("Du slog " + Dice.getSum() + ". Du står på felt nr: " + spiller[i].getFelt() + "\n" + felter.getFeltStr());
+            System.out.println("Spiller " + spiller[i].getName() + ", din saldo er: " + spiller[i].getKonto() + "og loose change er: " + looseChange.saldo + "\n");
+
+            if (i == (Max - 1)) { //Hvis i = antal spillere så start ved spiller[0]
+                i = -1;
+            }
+
+        }
 
     }
 
-}
+    }
