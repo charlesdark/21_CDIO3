@@ -1,27 +1,24 @@
 Du kører forbi start og modtager $2
 Du lander på Burgerbaren. Du køber den for $1
 Du lander på Pizzariaet. Du køber den for $1
+Du lander på chancen, du trækker et chance kort!
 Du lander på Slikbutikken. Du køber den for $1
 Du lander på Iskiosken. Du køber den for $1
-yeet
-yeetyeet
-yeetyeetyeet
-yeetyeetyeetyeet
-yeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
-yeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeetyeet
+Du besøger fængslet.
+Du lander på Museum. Du køber den for $2
+Du lander på Bibloteket. Du køber den for $2
+Du lander på chancen, du trækker et chance kort!
+Du lander på Skater parken. Du køber den for $2
+Du lander på Swimming poolen. Du køber den for $2
+Du lander på Gratis parkering. ......loose change??
+Du lander på Video spil arcaden. Du køber den for $3
+Du lander på Biografen. Du køber den for $3
+Du lander på chancen, du trækker et chance kort!
+Du lander på Legetøjsbutikken. Du køber den for $3
+Du lander på Kæledyrsbutikken. Du køber den for $3
+Du lander på Fængslet. Du bliver sendt i fængsel
+Du lander på Bowling hallen. Du køber den for $4
+Du lander på Zoologisk have. Du køber den for $4
+Du lander på chancen, du trækker et chance kort!
+Du lander på Forlystelses parken. Du køber den for $5
+Du lander på Strandpromenaden. Du køber den for $5
