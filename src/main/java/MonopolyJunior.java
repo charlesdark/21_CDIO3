@@ -1,18 +1,12 @@
 import java.awt.*;
-import java.util.Scanner;
 
 import gui_fields.*;
 import gui_main.GUI;
-import gui_fields.GUI_Shipping;
-import gui_codebehind.*;
-import gui_resources.*;
-import gui_tests.*;
 
 public class MonopolyJunior {
     public static void main(java.lang.String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Dice dice = new Dice();
-
+        Felter felter = new Felter();
+        LooseChange looseChange = new LooseChange();
 
         //Opretter en spilleplade med 40 felter
         GUI_Field[] fields = new GUI_Field[24];
@@ -28,7 +22,7 @@ public class MonopolyJunior {
         GUI_Chance chance2 = new GUI_Chance(); chance2.setBackGroundColor(Color.GREEN); chance2.setForeGroundColor(Color.BLACK); fields[9] = chance2;
         GUI_Street street7 = new GUI_Street(); street7.setTitle("Skate Park"); street7.setBorder(Color.BLACK); street7.setBackGroundColor(Color.ORANGE); street7.setSubText("2$"); fields[10] = street7;
         GUI_Street street8 = new GUI_Street(); street8.setTitle("Swimming Pool"); street8.setBorder(Color.BLACK); street8.setBackGroundColor(Color.ORANGE); street8.setSubText("2$"); fields[11] = street8;
-        GUI_Street railroad = new GUI_Street(); railroad.setTitle("Railroad"); railroad.setBorder(Color.BLACK); railroad.setBackGroundColor(Color.GREEN); railroad.setSubText("Du får en ekstra tur"); fields[12] = railroad;
+        fields[12] = new GUI_Shipping("src/main/Ressources/train-icon-21.jpg.png", "Railroad","2$","Du er landet på togstationen, og får nu en gratis tur med toget.", "2$", Color.GREEN, Color.BLACK);
         GUI_Street street9 = new GUI_Street(); street9.setTitle("Video Game Arcade"); street9.setBorder(Color.BLACK); street9.setBackGroundColor(Color.GRAY); street9.setSubText("2$"); fields[13] = street9;
         GUI_Street street10 = new GUI_Street(); street10.setTitle("Movie Theater"); street10.setBorder(Color.BLACK); street10.setBackGroundColor(Color.GRAY); street10.setSubText("2$"); fields[14] = street10;
         GUI_Street restrooms = new GUI_Street(); restrooms.setTitle("Restrooms"); restrooms.setBorder(Color.BLACK); restrooms.setBackGroundColor(Color.GREEN); restrooms.setSubText("?"); fields[15] = restrooms;
@@ -41,8 +35,9 @@ public class MonopolyJunior {
         GUI_Street street15 = new GUI_Street(); street15.setTitle("Park Place"); street15.setBorder(Color.BLACK); street15.setBackGroundColor(Color.BLUE); street15.setSubText("2$"); fields[22] = street15;
         GUI_Street street16 = new GUI_Street(); street16.setTitle("BoardWalk"); street16.setBorder(Color.BLACK); street16.setBackGroundColor(Color.BLUE); street16.setSubText("2$"); fields[23] = street16;
 
+
         GUI gui = new GUI(fields);
-        gui.setDice(1, 1);
+        gui.setDie(1);
 
         int numPlayers = gui.getUserInteger("Indtast antallet af spillere (2 - 4): ", 2, 4);
 
@@ -93,17 +88,35 @@ public class MonopolyJunior {
 
         for(int i = 0; player[i].getBalance() > 0; i++){
             //Slår med terningen
-            gui.showMessage(player[i].getName() + " tryk ok for at slå med terningen");
+            gui.showMessage(player[i].getName() + " tryk OK for at slå med terningen");
             spiller[i].roll();
-            gui.setDice(Dice.getDots1(),Dice.getDots2());
+            gui.setDie(Dice.getDots1());
 
             //Rykker spilleren hen til det nye felt
+            gui.showMessage("Flytter bilen!");
             fields[spiller[i].getFelt()].removeAllCars();
             spiller[i].setFelt();
             fields[spiller[i].getFelt()].setCar(player[i], true);
 
+            //Odaterer spillerens konto og betaler til loosechange
+            if(spiller[i].getFelt() == 6){
+                looseChange.betalSaldo(felter.getFeltInt());
+                spiller[i].setKonto(felter.getFeltInt());
+                gui.showMessage("Du betaler til Loose Change");
+            }
+            else if(spiller[i].getFelt() == 15){
+                looseChange.betalSaldo(felter.getFeltInt());
+                spiller[i].setKonto(felter.getFeltInt());
+                gui.showMessage("Du betaler til Loose Change");
+            }
+            else if(spiller[i].getFelt() == 18){
+                spiller[i].setKonto(looseChange.getPayed());
+                looseChange.Saldo = 0;
+                gui.showMessage("DU MODTAGER LOOSE CHANGE!!");
+            }
             //Opdaterer spilleren konto
-            spiller[i].setKonto(-2);
+            else {spiller[i].setKonto(felter.getFeltInt());
+                gui.showMessage(felter.getFeltstr());}
             player[i].setBalance(spiller[i].getKonto());
 
             //Giver en ekstra tur hvis man lander på railroad

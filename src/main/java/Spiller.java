@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class Spiller {
 
     String name;
@@ -9,9 +13,8 @@ public class Spiller {
         Dice dice = new Dice();
 
         dice.roll1();
-        dice.roll2();
 
-        slag = Dice.getSum();
+        slag = Dice.getDots1();
     }
     public int getKonto(){
         return konto;
@@ -22,15 +25,12 @@ public class Spiller {
     public int getFelt(){
         return felt;
     }
-    public void setFelt(){
-        if((felt + slag)>24){
+    public void setFelt() {
+        if ((felt + slag) >= 24) {
             felt = (felt + slag) % 24;
-            konto +=2;
-        }
-        else{
+            konto += 2;
+        } else {
             felt += slag;
         }
     }
-
-
 }
