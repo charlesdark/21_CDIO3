@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 public class Spiller {
 
     String name;
-    int konto = 35;
+    int konto = 0;
     int felt = 0;
     int slag;
 
@@ -21,6 +21,10 @@ public class Spiller {
     }
     public void setKonto(int tal){
         konto += tal;
+    }
+    public void goToJail(){
+        felt = 6;
+        konto += -1;
     }
     public int getFelt(){
         return felt;
