@@ -106,8 +106,7 @@ public class MonopolyJunior {
 
             //Odaterer spillerens konto og betaler til loosechange
             if(spiller[i].getFelt() == 18){
-                spiller[i].setKonto(felter.getFeltInt());
-                gui.showMessage("Du betaler til Loose Change");
+                spiller[i].goToJail();
             }
             //Opdaterer spilleren konto
             else {spiller[i].setKonto(felter.getFeltInt());
