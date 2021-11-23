@@ -1,10 +1,11 @@
 import java.awt.*;
+import java.io.IOException;
 
 import gui_fields.*;
 import gui_main.GUI;
 
 public class MonopolyJunior {
-    public static void main(java.lang.String[] args) {
+    public static void main(java.lang.String[] args) throws IOException {
         Felter felter = new Felter();
         LooseChange looseChange = new LooseChange();
 
@@ -29,13 +30,13 @@ public class MonopolyJunior {
         fields[16] = new GUI_Street("Legetøjsbutik", "2$", "Du har været ude og købe legetøj for 2$", "2$", Color.CYAN, Color.BLACK);
         fields[17] = new GUI_Street("Dyrehandler", "2$", "Du har købt et nyt kæledyr, det kostede dig 2$", "2$", Color.CYAN, Color.BLACK);
         fields[18] = new GUI_Shipping("src/main/Ressources/dollarSign.png", "Loose Change", "", "Tillykke, du modtager Loose Change!", "2$", Color.GREEN, Color.BLACK);
-        fields[19] = new GUI_Street("Bowlinghal", "2$", "Du har været ude og bowle, det kostede dig 2$", "2$", Color.PINK, Color.BLACK);
-        fields[20] = new GUI_Street("Zoo", "2$", "Du har været i zoologisk have, billetten kostede 2$", "2$", Color.PINK, Color.BLACK);
+        fields[19] = new GUI_Street("Bowlinghal", "2$", "Du har været ude og bowle, det kostede dig 2$", "2$", Color.DARK_GRAY, Color.BLACK);
+        fields[20] = new GUI_Street("Zoo", "2$", "Du har været i zoologisk have, billetten kostede 2$", "2$", Color.DARK_GRAY, Color.BLACK);
         GUI_Chance chance3 = new GUI_Chance(); chance3.setBackGroundColor(Color.GREEN); chance3.setForeGroundColor(Color.BLACK); fields[21] = chance3;
         fields[22] = new GUI_Street("Kongens Have", "2$", "Du har været en tur i parken hvor du købte noget at spise, det kostede 2$", "2$", Color.BLUE, Color.BLACK);
         fields[23] = new GUI_Street("Stadion", "2$", "Du har været ude og se fodbold, det kostede 2$ at komme ind", "2$", Color.BLUE, Color.BLACK);
 
-        GUI gui = new GUI(fields);
+        GUI gui = new GUI(fields, Color.PINK);
         gui.setDie(1);
 
         int numPlayers = gui.getUserInteger("Indtast antallet af spillere (2 - 4): ", 2, 4);
@@ -95,6 +96,7 @@ public class MonopolyJunior {
             gui.showMessage("Flytter bilen!");
             fields[spiller[i].getFelt()].removeAllCars();
             spiller[i].setFelt();
+            felter.setFelt(spiller[i].getFelt());
             fields[spiller[i].getFelt()].setCar(player[i], true);
 
             //Odaterer spillerens konto og betaler til loosechange
