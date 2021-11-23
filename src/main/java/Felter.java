@@ -8,11 +8,11 @@ public class Felter {
 
     //Læser fra tekstfiler med felters Strings og Ints
     public void setFelt(int slag) throws IOException {
-        String feltString = "src/main/java/FelterInt.txt";
+        String feltString = "src/main/Ressources/FelterInt.txt";
         feltString = Files.readAllLines(Paths.get(feltString)).get(slag);
         feltInt = Integer.parseInt(feltString);
 
-        String feltDK = "src/main/java/FelterDK.txt";
+        String feltDK = "src/main/Ressources/FelterDK.txt";
         description = Files.readAllLines(Paths.get(feltDK)).get(slag);
     }
     //Metode til at hente linje fra FelterDK.txt

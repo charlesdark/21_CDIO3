@@ -1,40 +1,16 @@
 import java.awt.*;
+import java.io.IOException;
 
 import gui_fields.*;
 import gui_main.GUI;
 
 public class MonopolyJunior {
-    public static void main(java.lang.String[] args) {
+    public static void main(java.lang.String[] args) throws IOException {
+        //Opretter felter til spillepladen
         Felter felter = new Felter();
-
-        //Opretter en spilleplade med 40 felter
-        GUI_Field[] fields = new GUI_Field[24];
-        fields[0] = new GUI_Start("GO!", "Du modtager 2$", "Du har passeret start.", Color.GREEN, Color.BLACK);
-        fields[1] = new GUI_Street("Burger Bar", "2$", "Du har været ude og købe en burger til aftensmad, den koster dig 2$", "2$", Color.RED, Color.BLACK);
-        fields[2] = new GUI_Street("Pizza bar", "2$", "Du har været ude og købe en pizza til aftensmad, den koster dig 2$", "2$", Color.RED, Color.BLACK);
-        GUI_Chance chance = new GUI_Chance(); chance.setBackGroundColor(Color.GREEN); chance.setForeGroundColor(Color.BLACK); fields[3] = chance;
-        fields[4] = new GUI_Street("Slikbutik", "2$", "Du har blandet slik for 2$","2$", Color.YELLOW, Color.BLACK);
-        fields[5] = new GUI_Street("Isbutik", "2$", "Du har købt en is til 2$", "2$", Color.YELLOW, Color.BLACK);
-        fields[6] = new GUI_Shipping("src/main/Ressources/Pay.png", "På besøg!", "2$", "Du skal betale 2$ til Loose Change!", "2$", Color.GREEN, Color.BLACK);
-        fields[7] = new GUI_Street("Museum", "2$", "Du har været en tur på museum, og det har kostet dig 2$ for billetten", "2$", Color.BLUE, Color.BLACK);
-        fields[8] = new GUI_Street("Bibliotek", "2$", "Du har været en tur på biblioteket, og det har kostet dig 2$ for at få et bibliotekskort", "2$", Color.BLUE, Color.BLACK);
-        GUI_Chance chance2 = new GUI_Chance(); chance2.setBackGroundColor(Color.GREEN); chance2.setForeGroundColor(Color.BLACK); fields[9] = chance2;
-        fields[10] = new GUI_Street("Skate park", "2$", "Du har været ude og skate og mangler et nyt skatebræt, det koster dig 2$", "2$", Color.ORANGE, Color.BLACK);
-        fields[11] = new GUI_Street("Svømmehal", "2$", "Du har været en tur i svømmehallen, og det koster dig 2$.", "2$", Color.ORANGE, Color.BLACK);
-        fields[12] = new GUI_Shipping("src/main/Ressources/Railroad.png", "Gratis Parkering","2$","Du er landet på togstationen, og får nu en gratis tur med toget.", "2$", Color.GREEN, Color.BLACK);
-        fields[13] = new GUI_Street("Spillehal", "2$", "Du har været i spillehallen med dine venner, du har brugt 2$", "2$", Color.GRAY,Color.BLACK);
-        fields[14] = new GUI_Street("Biografen", "2$", "Du har været i biografen og set en film, billetten kostede 2$", "2$", Color.GRAY, Color.BLACK);
-        GUI_Chance chance3 = new GUI_Chance(); chance3.setBackGroundColor(Color.GREEN); chance3.setForeGroundColor(Color.BLACK); fields[15] = chance3;
-        fields[16] = new GUI_Street("Legetøjsbutik", "2$", "Du har været ude og købe legetøj for 2$", "2$", Color.CYAN, Color.BLACK);
-        fields[17] = new GUI_Street("Dyrehandler", "2$", "Du har købt et nyt kæledyr, det kostede dig 2$", "2$", Color.CYAN, Color.BLACK);
-        fields[18] = new GUI_Shipping("src/main/Ressources/dollarSign.png", "Gå i fængsel!", "", "Tillykke, du modtager Loose Change!", "2$", Color.GREEN, Color.BLACK);
-        fields[19] = new GUI_Street("Bowlinghal", "2$", "Du har været ude og bowle, det kostede dig 2$", "2$", Color.PINK, Color.BLACK);
-        fields[20] = new GUI_Street("Zoo", "2$", "Du har været i zoologisk have, billetten kostede 2$", "2$", Color.PINK, Color.BLACK);
-        GUI_Chance chance4 = new GUI_Chance(); chance4.setBackGroundColor(Color.GREEN); chance4.setForeGroundColor(Color.BLACK); fields[21] = chance4;
-        fields[22] = new GUI_Street("Kongens Have", "2$", "Du har været en tur i parken hvor du købte noget at spise, det kostede 2$", "2$", Color.BLUE, Color.BLACK);
-        fields[23] = new GUI_Street("Stadion", "2$", "Du har været ude og se fodbold, det kostede 2$ at komme ind", "2$", Color.BLUE, Color.BLACK);
-
-        GUI gui = new GUI(fields);
+        GameBoard gameboard = new GameBoard();
+        //Opretter en ny spilleplade.
+        GUI gui = new GUI(gameboard.fields, Color.PINK);
         gui.setDie(1);
 
         int numPlayers = gui.getUserInteger("Indtast antallet af spillere (2 - 4): ", 2, 4);
@@ -87,7 +63,7 @@ public class MonopolyJunior {
         }
         //Tilføjer spillerne til start-pladsen
         for(int i = 0; i < numPlayers; i++) {
-            fields[0].setCar(player[i], true);
+            gameboard.fields[0].setCar(player[i], true);
         }
 
         gui.showMessage("Tryk OK for at starte spillet!");
@@ -100,37 +76,39 @@ public class MonopolyJunior {
 
             //Rykker spilleren hen til det nye felt
             gui.showMessage("Flytter bilen!");
-            fields[spiller[i].getFelt()].removeAllCars();
+            gameboard.fields[spiller[i].getFelt()].removeAllCars();
             spiller[i].setFelt();
-            fields[spiller[i].getFelt()].setCar(player[i], true);
+            felter.setFelt(spiller[i].getFelt());
+            gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
 
-            //Odaterer spillerens konto og betaler til loosechange
+            //Odaterer spillerens konto og sender personen i fængsel.
             if(spiller[i].getFelt() == 18){
+                gameboard.fields[spiller[i].getFelt()].removeAllCars();
                 spiller[i].goToJail();
+                gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
             }
             //Opdaterer spilleren konto
-            else {spiller[i].setKonto(felter.getFeltInt());
-                gui.showMessage(felter.getFeltstr());}
+            else {spiller[i].setKonto(felter.getFeltInt());}
             player[i].setBalance(spiller[i].getKonto());
+            gui.showMessage(felter.getFeltstr());
 
-            //Giver en ekstra tur hvis man lander på railroad
-            if(spiller[i].getFelt() == 12){
-                i = i-1;
-                gui.showMessage("Du har fået et ekstra slag!");
+
+            if(player[i].getBalance() < 1) {
+                break;
             }
-
-            if(i == (numPlayers - 1)){
+            else if (i == (numPlayers - 1)){
                 i = -1;
             }
-        }
-        int x;
-        int max = spiller[0].getKonto();
 
-        for (x = 0; x < numPlayers; x++) {
-            if (spiller[x].getKonto() > max) {
-                max = spiller[x].getKonto();
+            }
+        int x;
+        int max = player[0].getBalance();
+
+        for (x = 0; x < numPlayers - 1; x++) {
+            if (player[x].getBalance() > max) {
+                max = player[x].getBalance();
             }
         }
-        gui.showMessage("Vinderen er " + spiller[x]);
+        gui.showMessage("Vinderen er " + player[x].getName());
     }
 }
