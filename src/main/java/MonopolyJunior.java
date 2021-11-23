@@ -128,6 +128,14 @@ public class MonopolyJunior {
                 i = -1;
             }
         }
+        int x;
+        int max = spiller[0].getKonto();
 
+        for (x = 0; x < numPlayers; x++) {
+            if (spiller[x].getKonto() > max) {
+                max = spiller[x].getKonto();
+            }
+        }
+        gui.showMessage("Vinderen er " + spiller[x]);
     }
 }
