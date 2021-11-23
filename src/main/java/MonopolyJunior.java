@@ -1,23 +1,26 @@
 import java.awt.*;
 import java.io.IOException;
-
 import gui_fields.*;
 import gui_main.GUI;
 
 public class MonopolyJunior {
     public static void main(java.lang.String[] args) throws IOException {
+        int balance;
+
         //Opretter felter til spillepladen
         Felter felter = new Felter();
         GameBoard gameboard = new GameBoard();
+
         //Opretter en ny spilleplade.
         GUI gui = new GUI(gameboard.fields, Color.PINK);
         gui.setDie(1);
 
         int numPlayers = gui.getUserInteger("Indtast antallet af spillere (2 - 4): ", 2, 4);
 
+        //Opretter et array til spillerne.
         GUI_Player player[] = new GUI_Player[numPlayers];
         Spiller spiller[] = new Spiller[numPlayers];
-        int balance;
+
         if(numPlayers == 2){balance = 20;}
         else if(numPlayers == 3){balance = 18;}
         else{balance = 16;}
@@ -26,11 +29,11 @@ public class MonopolyJunior {
         for (int i = 0; i < numPlayers; i++) {
             if (i == 0) {
                 spiller[i] = new Spiller();
+                spiller[i].setKonto(balance);
                 String player1In = gui.getUserString("Indtast et navn: ");
                 GUI_Car car1 = new GUI_Car();
                 car1.setPrimaryColor(Color.YELLOW);
                 player[i] = new GUI_Player(player1In, balance, car1);
-                spiller[i].setKonto(balance);
                 gui.addPlayer(player[i]);
             }
             if (i == 1) {
@@ -61,12 +64,11 @@ public class MonopolyJunior {
                 gui.addPlayer(player[i]);
             }
         }
+
         //Tilføjer spillerne til start-pladsen
         for(int i = 0; i < numPlayers; i++) {
             gameboard.fields[0].setCar(player[i], true);
         }
-
-        gui.showMessage("Tryk OK for at starte spillet!");
 
         for(int i = 0; player[i].getBalance() > 0; i++){
             //Slår med terningen
@@ -78,37 +80,41 @@ public class MonopolyJunior {
             gui.showMessage("Flytter bilen!");
             gameboard.fields[spiller[i].getFelt()].removeAllCars();
             spiller[i].setFelt();
+
+            //Sætter feltet i Felter, for at at kunne indlæse linjer fra tekstfiler
             felter.setFelt(spiller[i].getFelt());
             gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
 
-            //Odaterer spillerens konto og sender personen i fængsel.
+            //Opdaterer spillerens konto og sender personen i fængsel.
             if(spiller[i].getFelt() == 18){
                 gameboard.fields[spiller[i].getFelt()].removeAllCars();
                 spiller[i].goToJail();
                 gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
             }
+
             //Opdaterer spilleren konto
             else {spiller[i].setKonto(felter.getFeltInt());}
             player[i].setBalance(spiller[i].getKonto());
             gui.showMessage(felter.getFeltstr());
 
-
+            //Tjekker om spillerens konto er under 1.
             if(player[i].getBalance() < 1) {
                 break;
             }
             else if (i == (numPlayers - 1)){
                 i = -1;
             }
-
             }
-        int x;
-        int max = player[0].getBalance();
 
-        for (x = 0; x < numPlayers - 1; x++) {
-            if (player[x].getBalance() > max) {
-                max = player[x].getBalance();
+        int max = player[0].getBalance();
+        int i;
+
+        // Vurderer hvilken af spillerne har den højeste pengebeholdning efter en er gået fallit.
+        for (i = 0; i < numPlayers - 1; i++) {
+            if (player[i].getBalance() > max) {
+                max = player[i].getBalance();
             }
         }
-        gui.showMessage("Vinderen er " + player[x].getName());
+        gui.showMessage("Vinderen er " + player[i].getName());
     }
 }

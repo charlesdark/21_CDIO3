@@ -5,9 +5,11 @@ import java.nio.file.Paths;
 public class Spiller {
 
     String name;
-    int konto = 0;
-    int felt = 0;
-    int slag;
+    private int konto = 0;
+    private int felt = 0;
+    private int slag;
+
+
 
     public void roll() {
         Dice dice = new Dice();
