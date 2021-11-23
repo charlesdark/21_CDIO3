@@ -12,7 +12,7 @@ class MonopolyJuniorTest {
         spiller[0] = new Spiller();
         spiller[1] = new Spiller();
         spiller[2] = new Spiller();
-        spiller[0].setKonto(5);
+        spiller[0].setKonto(-35);
         spiller[1].setKonto(10);
         spiller[2].setKonto(30);
         System.out.println(spiller[0].getKonto());
