@@ -11,8 +11,8 @@ class MonopolyJuniorTest {
         spiller[1] = new Spiller();
         spiller[2] = new Spiller();
         spiller[0].setKonto(0);
-        spiller[0].setKonto(45);
-        spiller[0].setKonto(65);
+        spiller[1].setKonto(45);
+        spiller[2].setKonto(65);
 
         int x;
         int max = spiller[0].getKonto();

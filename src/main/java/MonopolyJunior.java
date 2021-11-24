@@ -2,6 +2,8 @@ import java.awt.*;
 import java.io.IOException;
 import gui_fields.*;
 import gui_main.GUI;
+
+import java.util.Objects;
 import java.util.Random;
 
 public class MonopolyJunior {
@@ -20,8 +22,8 @@ public class MonopolyJunior {
         int numPlayers = gui.getUserInteger("Indtast antallet af spillere (2 - 4): ", 2, 4);
 
         //Opretter et array til spillerne.
-        GUI_Player player[] = new GUI_Player[numPlayers];
-        Spiller spiller[] = new Spiller[numPlayers];
+        GUI_Player[] player = new GUI_Player[numPlayers];
+        Spiller[] spiller = new Spiller[numPlayers];
 
         if(numPlayers == 2){balance = 20;}
         else if(numPlayers == 3){balance = 18;}
@@ -98,11 +100,11 @@ public class MonopolyJunior {
                Random chance = new Random();
                 int a = chance.nextInt(6);
 
-                if(chancekort.kortBunke[a].getAction() == "money" ){
+                if(Objects.equals(chancekort.kortBunke[a].getAction(), "money")){
                 spiller[i].setKonto(chancekort.kortBunke[a].getValue());
                 gui.showMessage(chancekort.kortBunke[a].getDescription());
                }
-               else if(chancekort.kortBunke[a].getAction() == "move"){
+               else if(Objects.equals(chancekort.kortBunke[a].getAction(), "move")){
                    gameboard.fields[spiller[i].getFelt()].removeAllCars();
                    spiller[i].setChanceFelt(chancekort.kortBunke[a].getValue());
                    gui.showMessage(chancekort.kortBunke[a].getDescription());
