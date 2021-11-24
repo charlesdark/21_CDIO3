@@ -1,12 +1,10 @@
 import org.junit.jupiter.api.Assertions;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MonopolyJuniorTest {
 
     @org.junit.jupiter.api.Test
     void main() {
-        Spiller spiller[] = new Spiller[3];
+        Spiller[] spiller = new Spiller[3];
         spiller[0] = new Spiller();
         spiller[1] = new Spiller();
         spiller[2] = new Spiller();
