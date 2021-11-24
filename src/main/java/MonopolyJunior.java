@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.IOException;
 import gui_fields.*;
 import gui_main.GUI;
+import java.util.Random;
 
 public class MonopolyJunior {
     public static void main(java.lang.String[] args) throws IOException {
@@ -10,6 +11,7 @@ public class MonopolyJunior {
         //Opretter felter til spillepladen
         Felter felter = new Felter();
         GameBoard gameboard = new GameBoard();
+        chanceKortHandler chancekort = new chanceKortHandler();
 
         //Opretter en ny spilleplade.
         GUI gui = new GUI(gameboard.fields, Color.PINK);
@@ -81,9 +83,10 @@ public class MonopolyJunior {
             gameboard.fields[spiller[i].getFelt()].removeAllCars();
             spiller[i].setFelt();
 
-            //Sætter feltet i Felter, for at at kunne indlæse linjer fra tekstfiler
+            //Sætter værdien af feltet i Felter, for at at kunne indlæse den rigtige linje fra tekstfiler
             felter.setFelt(spiller[i].getFelt());
             gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
+            gui.showMessage(felter.getFeltstr());
 
             //Opdaterer spillerens konto og sender personen i fængsel.
             if(spiller[i].getFelt() == 18){
@@ -91,11 +94,31 @@ public class MonopolyJunior {
                 spiller[i].goToJail();
                 gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
             }
+            else if(spiller[i].getFelt() == 3 || spiller[i].getFelt() == 9 || spiller[i].getFelt() == 15 || spiller[i].getFelt() == 21){
+               Random chance = new Random();
+                int a = chance.nextInt(6);
+
+                if(chancekort.kortBunke[a].getAction() == "money" ){
+                spiller[i].setKonto(chancekort.kortBunke[a].getValue());
+                gui.showMessage(chancekort.kortBunke[a].getDescription());
+               }
+               else if(chancekort.kortBunke[a].getAction() == "move"){
+                   gameboard.fields[spiller[i].getFelt()].removeAllCars();
+                   spiller[i].setChanceFelt(chancekort.kortBunke[a].getValue());
+                   gui.showMessage(chancekort.kortBunke[a].getDescription());
+                   gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);
+               }
+               else {gameboard.fields[spiller[i].getFelt()].removeAllCars();
+                    spiller[i].moveToStart();
+                    gui.showMessage(chancekort.kortBunke[a].getDescription());
+                    gameboard.fields[spiller[i].getFelt()].setCar(player[i], true);}
+            }
 
             //Opdaterer spilleren konto
-            else {spiller[i].setKonto(felter.getFeltInt());}
+            else {spiller[i].setKonto(felter.getFeltInt());
+                gui.showMessage(felter.getFeltstr());}
             player[i].setBalance(spiller[i].getKonto());
-            gui.showMessage(felter.getFeltstr());
+
 
             //Tjekker om spillerens konto er under 1.
             if(player[i].getBalance() < 1) {

@@ -3,8 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Felter {
-    String description;
-    int feltInt;
+    private String description;
+    private int feltInt;
 
     //Læser fra tekstfiler med felters Strings og Ints
     public void setFelt(int slag) throws IOException {

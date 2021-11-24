@@ -2,14 +2,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Spiller {
+import gui_fields.GUI_Player;
+import gui_main.GUI;
 
-    String name;
+public class Spiller {
+    private String name;
     private int konto = 0;
     private int felt = 0;
     private int slag;
-
-
 
     public void roll() {
         Dice dice = new Dice();
@@ -18,6 +18,10 @@ public class Spiller {
 
         slag = Dice.getDots1();
     }
+
+    private void setBalance(){
+    }
+
     public int getKonto(){
         return konto;
     }
@@ -38,5 +42,11 @@ public class Spiller {
         } else {
             felt += slag;
         }
+    }
+    public void setChanceFelt(int a){
+        felt += a;
+    }
+    public void moveToStart(){
+        felt = 0;
     }
 }
