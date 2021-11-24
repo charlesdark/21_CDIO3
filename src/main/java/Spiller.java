@@ -43,8 +43,13 @@ public class Spiller {
             felt += slag;
         }
     }
-    public void setChanceFelt(int a){
-        felt += a;
+    public void setChanceFelt(int a) {
+        if ((felt + a) >= 24) {
+            felt = (felt + a) % 24;
+            konto += 2;
+        } else {
+            felt += a;
+        }
     }
     public void moveToStart(){
         felt = 0;
