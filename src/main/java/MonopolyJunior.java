@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MonopolyJunior {
@@ -21,8 +23,24 @@ public class MonopolyJunior {
             spiller[i].setName(sc.next());
         }
 
+        //Højeste slag starter
+        ArrayList<Integer> highRoll = new ArrayList<Integer>();
+        ArrayList<Integer> sortRoll = new ArrayList<Integer>();
+
+        for (int i = 0; i < Max; i++) {
+            spiller[i].roll();
+            System.out.println(spiller[i].getName() + " slå med terningen.");
+            highRoll.add(Dice.getDots1());
+            sortRoll.add(Dice.getDots1());
+            System.in.read();
+            System.out.println(spiller[i].getName() + " slog " + Dice.getDots1() + "\n");
+        }
+        Collections.sort(sortRoll);
+        int i = highRoll.indexOf(sortRoll.get(sortRoll.size() - 1));
+        System.out.println(spiller[i].getName() + " Starter");
+
         //Kør et loop indtil en spillers konto når 0
-        for (int i = 0; spiller[i].getKonto() > 0; i++) {
+        for (i = i; spiller[i].getKonto() > 0; i++) {
             spiller[i].roll();  //Slå spillers terning
             spiller[i].setFelt(); //Sæt spilleren på et felt
             felter.setFelt(spiller[i].getFelt()); //Sætter felter-klassen på samme felt som spilleren
