@@ -18,8 +18,8 @@ class MonopolyJuniorTest {
         int max = spiller[0].getKonto();
 
         for(x = 0; x < 3; x++){
-            if(spiller[x].getKonto() > max);
-            max = spiller[x].getKonto();
+            if(spiller[x].getKonto() > max)
+                max = spiller[x].getKonto();
         }
         Assertions.assertEquals(spiller[2].getKonto(), max);
     }
