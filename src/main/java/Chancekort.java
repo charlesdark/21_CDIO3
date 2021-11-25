@@ -8,10 +8,6 @@
         this.action = action;
         this.value = value;
     }
-
-     public Chancekort() {
-     }
-
      public int getValue(){return this.value;}
      public String getDescription(){return this.description;}
      public String getAction(){return this.action;}
