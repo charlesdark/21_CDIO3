@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class GameBoard {
     GUI_Field[] fields = new GUI_Field[24];
-    Felter felter = new Felter();
     public GameBoard() {
         fields[0] = new GUI_Start("GO!", "Du modtager 2$", "Du har passeret start.", Color.GREEN, Color.BLACK);
         fields[1] = new GUI_Street("Burger Bar", "$1", "Du har været ude og købe en burger til aftensmad, den koster dig 2$", "2$", Color.RED, Color.BLACK);

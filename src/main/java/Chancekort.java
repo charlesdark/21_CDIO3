@@ -10,6 +10,7 @@
     }
 
      public Chancekort() {
+
      }
 
      public int getValue(){return this.value;}
