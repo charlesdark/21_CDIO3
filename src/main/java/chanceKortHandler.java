@@ -1,5 +1,5 @@
 public class chanceKortHandler extends Chancekort{
-    Chancekort[] kortBunke = new Chancekort[6];
+    Chancekort[] kortBunke = new Chancekort[10];
     public chanceKortHandler(){
         Chancekort kort1 = new Chancekort("Ryk 5 felter frem!", "move", 5); kortBunke[0] = kort1;
         Chancekort kort2 = new Chancekort("Modtag $2!", "money", 10); kortBunke[1] = kort2;
