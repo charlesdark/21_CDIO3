@@ -1,12 +1,4 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import gui_fields.GUI_Player;
-import gui_main.GUI;
-
 public class Spiller {
-    private String name;
     private int konto = 0;
     private int felt = 0;
     private int slag;
@@ -18,10 +10,6 @@ public class Spiller {
 
         slag = Dice.getDots1();
     }
-
-    private void setBalance(){
-    }
-
     public int getKonto(){
         return konto;
     }
@@ -30,7 +18,7 @@ public class Spiller {
     }
     public void goToJail(){
         felt = 6;
-        konto += -1;
+        konto -= 1;
     }
     public int getFelt(){
         return felt;
@@ -43,8 +31,13 @@ public class Spiller {
             felt += slag;
         }
     }
-    public void setChanceFelt(int a){
-        felt += a;
+    public void setChanceFelt(int a) {
+        if ((felt + a) >= 24) {
+            felt = (felt + a) % 24;
+            konto += 2;
+        } else {
+            felt += a;
+        }
     }
     public void moveToStart(){
         felt = 0;
